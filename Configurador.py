@@ -13,7 +13,6 @@ import Persistencia_factory_mySql
 """
 class Configurador:
     def __init__(self, path_fitxer_configuracio):
-        print (f"configurador {__name__=}")
         self.yaml_config = path_fitxer_configuracio
         self.config = {}
         with open(path_fitxer_configuracio, 'r') as conf:
@@ -32,19 +31,6 @@ class Configurador:
                 host,
                 usuari,
                 paraula_pas,
-                base_dades
+                base_dades,
+                self.config
             )
-        
-if __name__ == "__main__":
-    path_mysql = os.path.join(os.path.dirname(__file__), "configuracio_mysql.yml")
-    path_sqlite = os.path.join(os.path.dirname(__file__), "configuracio_sqlite.yml")
-
-    configurador = Configurador(path_mysql)
-    print("mysql: ", end="\t")
-    print(configurador.get_config()["base de dades"])
-    pf = configurador.get_Persistencia_factory()
-    print(pf.get_Persistencia_usuari_factory())
-
-    print("sqlite: ", end="\t")
-    configurador = Configurador(path_sqlite)
-    print(configurador.get_config()["base de dades"])

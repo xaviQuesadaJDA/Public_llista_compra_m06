@@ -2,12 +2,11 @@
 # -*- coding: utf-8 -*-
 
 class Usuari:
-    def __init__(self, configurador, id, user, password_hash):
-        self.configurador = configurador
+    def __init__(self, persistencia, id, user, password_hash):
         self.id = id
         self.user = user
         self.password_hash = password_hash
-        self.persistencia = configurador.get_Persistencia_factory().get_Persistencia_usuari_factory()
+        self.persistencia = persistencia
 
     def get_nom(self):
         return self.user
@@ -21,3 +20,6 @@ class Usuari:
     def desa(self):
         self.id = self.persistencia.desa(self)
         return self
+
+    def delete(self):
+        return self.persistencia.delete(self.get_id())

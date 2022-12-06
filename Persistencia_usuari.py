@@ -5,7 +5,7 @@ import abc
 
 class Persistencia_usuari(abc.ABC):
     @abc.abstractmethod
-    def get(self, id):
+    def get(self, id, configurador):
         pass
 
     @abc.abstractmethod
