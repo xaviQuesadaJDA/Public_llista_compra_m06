@@ -32,5 +32,5 @@ class Configurador:
                 usuari,
                 paraula_pas,
                 base_dades,
-                self.config
+                self
             )

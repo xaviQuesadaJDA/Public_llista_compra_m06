@@ -19,3 +19,7 @@ class Persistencia_usuari(abc.ABC):
     @abc.abstractmethod
     def delete(self, id):
         pass
+
+    @abc.abstractmethod
+    def set_sessio(self, id_sessio, usuari):
+        pass

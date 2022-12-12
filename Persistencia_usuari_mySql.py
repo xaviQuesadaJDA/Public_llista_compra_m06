@@ -23,7 +23,7 @@ class Persistencia_usuari_mySql(Persistencia_usuari.Persistencia_usuari):
         if len(registres) > 0:
             usuari_nom = registres[0][0]
             usuari_password_hash = registres[0][1]
-            resultat = Usuari.Usuari(self.configurador, id, usuari_nom, usuari_password_hash)
+            resultat = Usuari.Usuari(self.configurador.get_Persistencia_factory().get_Persistencia_usuari_factory(), id, usuari_nom, usuari_password_hash)
             return resultat
         return None
 
@@ -96,3 +96,15 @@ class Persistencia_usuari_mySql(Persistencia_usuari.Persistencia_usuari):
         if len(registres) > 0:
             return registres[0][0]
         return None 
+
+    def set_sessio(self, id_sessio, usuari):
+        db = self.__get_db_connection()
+
+        query = "Insert into sessions_usuaris (uuid, usuari) values(%s,%s)"
+        valors = (id_sessio, usuari.get_id())
+        cursor = db.cursor()
+        resultat = cursor.execute(query, valors)
+        db.commit()
+        cursor.close()
+        db.close()
+        return resultat

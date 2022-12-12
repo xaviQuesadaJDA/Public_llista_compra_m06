@@ -47,6 +47,9 @@ classDiagram
     class App_llista_compra{
         - Configurador configuracio
         - Usuari usuaris[]
+        + Usuari create_usuari(user, password)
+        + Dictionary registre_usuari(nom, password)
+        + Dictionary login_usuari(nom, password)
     }
 
     class Configurador{
@@ -65,6 +68,9 @@ classDiagram
         - str password_hash
         - Llista llista
         - Persistencia_usuari persistencia
+        - Usuari desa()
+        - delete()
+        - str set_sessio()
     }
 
     class Llista{
@@ -103,6 +109,7 @@ classDiagram
         + Usuari get(id)
         + Usuari[] get_llista()
         + delete(id) 
+        + str set_sessio(id_sessio, usuari)
     }
 
     class Persistencia_llista{
@@ -146,16 +153,17 @@ classDiagram
     Usuari --> Llista
     Usuari --> Persistencia_usuari
     Persistencia_usuari <|.. Persistencia_usuari_mySql
-    Llista --> Registre
+    Llista *-- Registre
     Llista --> Persistencia_llista
     Persistencia_llista <|.. Persistencia_llista_mySql
     Registre --> Article
     Registre --> Persistencia_registre
     Persistencia_registre <|.. Persistencia_registre_mySql
-    Article --> Categoria
+    Article --o Categoria
     Article --> Persistencia_article
     Persistencia_article <|.. Persistencia_article_mySql
     Categoria --> Persistencia_categoria
     Persistencia_categoria <|.. Persistencia_categoria_mySql
+    Configurador --> Persistencia_Factory
 
 ```
