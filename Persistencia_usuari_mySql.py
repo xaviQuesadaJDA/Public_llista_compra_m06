@@ -107,4 +107,4 @@ class Persistencia_usuari_mySql(Persistencia_usuari.Persistencia_usuari):
         db.commit()
         cursor.close()
         db.close()
-        return resultat
+        return id_sessio

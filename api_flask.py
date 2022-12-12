@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, Response, make_response
 import App_llista_compra
 
 app = Flask(__name__)
@@ -20,7 +20,10 @@ def registre(nom_usuari, password):
 @app.route("/login/<nom_usuari>/<password>")
 def login(nom_usuari, password):
     resultat = app_llista_compra.login_usuari(nom_usuari, password)
-    return jsonify(resultat), resultat["estatus"]
+    response = make_response(jsonify(resultat), resultat["estatus"])
+    if resultat["estatus"] == 200:
+        response.headers['X-API-KEY'] = resultat["api-key"]
+    return response
 
 if __name__ == "__main__":
     app.run()
