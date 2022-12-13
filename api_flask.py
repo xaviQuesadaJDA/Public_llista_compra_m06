@@ -4,7 +4,10 @@
 from flask import Flask, jsonify, Response, make_response
 import App_llista_compra
 
-app = Flask(__name__)
+app = Flask(__name__,
+                static_url_path='/html/', 
+                static_folder='html'
+            )
 app_llista_compra = App_llista_compra.App_llista_compra()
 
 @app.route("/")
