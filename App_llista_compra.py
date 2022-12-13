@@ -52,7 +52,7 @@ class App_llista_compra:
         if len(llista_usuari) > 0:
             usuari = llista_usuari[0]
             if bcrypt.checkpw(password.encode(), usuari.get_password_hash().encode()):
-                return {"estatus": 200, "missatge": "OK", "api-key": self.__crea_sessio(usuari)}
+                return {"estatus": 200, "missatge": "OK", "api_key": self.__crea_sessio(usuari)}
         return {"estatus": 404, "missatge": "L'usuari no existeix o la paraula de pas no és correcta."}
 
     def __crea_sessio(self, usuari):

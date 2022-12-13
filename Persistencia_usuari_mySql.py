@@ -27,6 +27,22 @@ class Persistencia_usuari_mySql(Persistencia_usuari.Persistencia_usuari):
             return resultat
         return None
 
+    def get_from_apikey(self, id_sessio):
+        db = self.__get_db_connection()
+        query = "select id, usuaris.usuari, password_hash from usuaris join sessions_usuaris on usuaris.id = %s;"
+        valors = (id_sessio,)
+        cursor = db.cursor()
+        cursor.execute(query, valors)
+
+        registres = cursor.fetchall()
+        if len(registres) > 0:
+            usuari_id = registres[0][0]
+            usuari_nom = registres[0][1]
+            usuari_password = registres[0][2]
+            resultat = Usuari.Usuari(self.configurador.get_Persistencia_factory().get_Persistencia_usuari_factory(), usuari_id, usuari_nom, usuari_password_hash)
+            return resultat
+        return None
+
     def desa(self, usuari):
         db = self.__get_db_connection()
         id = self.__get_id_by_nom(usuari.get_nom())

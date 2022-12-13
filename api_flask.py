@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from flask import Flask, jsonify, Response, make_response
+from flask import Flask, jsonify, Response, make_response, render_template
 import App_llista_compra
 
 app = Flask(__name__,
@@ -25,8 +25,14 @@ def login(nom_usuari, password):
     resultat = app_llista_compra.login_usuari(nom_usuari, password)
     response = make_response(jsonify(resultat), resultat["estatus"])
     if resultat["estatus"] == 200:
-        response.headers['X-API-KEY'] = resultat["api-key"]
+        response.headers['X-API-KEY'] = resultat["api_key"]
     return response
+
+# @app.route("/restricted/<api_key>/<recurs>")
+@app.route("/restricted/<recurs>")
+def restricted(recurs):
+
+    return render_template(recurs)
 
 if __name__ == "__main__":
     app.run()

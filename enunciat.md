@@ -110,6 +110,7 @@ classDiagram
         + Usuari[] get_llista()
         + delete(id) 
         + str set_sessio(id_sessio, usuari)
+        + Usuari get_from_apikey(id_sessio)
     }
 
     class Persistencia_llista{

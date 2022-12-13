@@ -5,7 +5,11 @@ import abc
 
 class Persistencia_usuari(abc.ABC):
     @abc.abstractmethod
-    def get(self, id, configurador):
+    def get(self, id):
+        pass
+
+    @abc.abstractmethod
+    def get_from_apikey(self, id_sessio):
         pass
 
     @abc.abstractmethod

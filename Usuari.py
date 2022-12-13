@@ -29,4 +29,3 @@ class Usuari:
 
     def set_sessio(self, id_sessio):
         return self.persistencia.set_sessio(id_sessio, self)
-
