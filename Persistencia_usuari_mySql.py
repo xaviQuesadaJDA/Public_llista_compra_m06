@@ -29,7 +29,7 @@ class Persistencia_usuari_mySql(Persistencia_usuari.Persistencia_usuari):
 
     def get_from_apikey(self, id_sessio):
         db = self.__get_db_connection()
-        query = "select id, usuaris.usuari, password_hash from usuaris join sessions_usuaris on sessions_usuaris.uuid = %s;"
+        query = "select id, usuaris.usuari, password_hash from usuaris inner join sessions_usuaris on (sessions_usuaris.usuari = usuaris.id) where sessions_usuaris.uuid = %s;"
         valors = (id_sessio,)
         cursor = db.cursor()
         cursor.execute(query, valors)
