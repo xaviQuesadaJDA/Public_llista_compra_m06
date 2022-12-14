@@ -65,12 +65,17 @@
                 fila_categoria = document.createElement('td');
                 fila_categoria.appendChild(document.createTextNode(element.article.categoria));
                 fila_categoria.setAttribute('class', 'cat_colum');
+                fila_categoria.setAttribute('onclick', "show_only('" + element.article.categoria + "')");
                 files.appendChild(fila_qty);
                 files.appendChild(fila_article);
                 files.appendChild(fila_categoria);
                 contenidor.appendChild(files);
             });
 
+        }
+
+        function show_only(categoria){
+            window.alert("Show only " + categoria);
         }
     </script>
 </head>

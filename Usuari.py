@@ -34,8 +34,8 @@ class Usuari:
         # TODO implement get_llista()
         # TODO tractar la llista de veritat, això és MOCK
         return [
-            {"qty": 3, "article": {"categoria": "begudes", "nom": "aigua amb gas"}},
+            {"qty": 3, "article": {"categoria": "begudes", "nom": "Aigua amb gas"}},
             {"qty": 6, "article": {"categoria": "frescos", "nom": "Síndries"}},
             {"qty": 2, "article": {"categoria": "refrigerats", "nom": "Yogurt de llet de cabra"}},
-            {"qty": 1, "article": {"categoria": "hogar", "nom": "coixí"}}
+            {"qty": 1, "article": {"categoria": "hogar", "nom": "Coixí"}}
         ]
