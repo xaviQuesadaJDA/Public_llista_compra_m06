@@ -41,7 +41,9 @@ def restricted(recurs):
 def llista():
     api_key = request.headers['X-API-KEY']
     usuari_from_api_key = app_llista_compra.get_usuari_from_api_key(api_key)
-    return jsonify(usuari_from_api_key.get_llista())
+    if usuari_from_api_key:
+        return jsonify(usuari_from_api_key.get_llista())
+    return jsonify({"missatge": "NO autoritzat!", "estatus": 401}), 401
 
 if __name__ == "__main__":
     app.run()

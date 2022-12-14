@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/html/favicon.png">
     <title>[X] Llista Compra. Vista principal</title>
     <style>
         h1, h2{
@@ -16,7 +17,8 @@
         }
         .cat_colum{
             text-align: right;
-            background-color: AliceBlue;
+            background-color: PowderBlue;
+            color: white;
             padding-left: 10px;
         }
         .prod_colum{
@@ -35,9 +37,16 @@
                 method: 'GET',
                 headers: new Headers({'X-API-KEY': localStorage.getItem('api-key')})
             }).then(
-                response => response.json()
+                    function (response){
+                        if (response.ok){
+                            return response.json();
+                        }else{
+                            window.location = "/html/login.html";
+                            return null;
+                        }
+                    }
                 ).then(
-                    dades => tracta_dades_llista(dades)
+                    dades => dades != null ? tracta_dades_llista(dades) : null
                 );
         }
 
@@ -83,11 +92,7 @@
     <h1>Benvinguts a la vostra llista de la compra</h1>
     <h2>(Pàgina principal)</h2> 
     <div id="main" >
-        <table>
-            <tr><th>Quantitat</th><th>Article</th><th>Categoria</th></tr>
-            <tr><td>1</td><td class="prod_colum">Aigua amb gas</td><td class="cat_colum">Begudes</td></tr>
-            <tr><td>6</td><td class="prod_colum">Yogurt natural</td><td class="cat_colum">Refrigerats</td></tr>
-        </table>
+        
     </div>
 </body>
 </html>

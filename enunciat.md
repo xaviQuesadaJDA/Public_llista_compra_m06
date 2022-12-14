@@ -156,6 +156,8 @@ classDiagram
     Usuari --> Llista
     Usuari --> Persistencia_usuari
     Persistencia_usuari <|.. Persistencia_usuari_mySql
+    Persistencia_usuari <|.. Persistencia_usuari_redis
+    Persistencia_usuari <|.. Persistencia_usuari_sqlite
     Llista *-- Registre
     Llista --> Persistencia_llista
     Persistencia_llista <|.. Persistencia_llista_mySql
