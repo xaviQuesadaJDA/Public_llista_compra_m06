@@ -73,6 +73,8 @@ class Persistencia_usuari_mySql(Persistencia_usuari.Persistencia_usuari):
         cursor.execute(query)
 
         registres = cursor.fetchall()
+        cursor.close()
+        db.close()
         for id in registres:
             llista.append(self.get(id[0]))
         return llista

@@ -11,6 +11,7 @@ class Usuari:
         assert issubclass(type(persistencia), Persistencia_usuari.Persistencia_usuari)
         self.persistencia = persistencia
 
+
     def get_nom(self):
         return self.user
     
@@ -19,6 +20,9 @@ class Usuari:
 
     def get_id(self):
         return self.id
+
+    def set_id(self, id):
+        self.id = id
 
     def desa(self):
         self.id = self.persistencia.desa(self)

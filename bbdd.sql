@@ -12,7 +12,9 @@ create table if not exists usuaris(
 
 create table if not exists categories(
     id bigint unsigned AUTO_INCREMENT PRIMARY KEY,
-    categoria varchar(20) not null UNIQUE
+    categoria varchar(20) not null UNIQUE,
+    usuari bigint unsigned,
+    FOREIGN KEY (usuari) REFERENCES usuaris(id) ON DELETE CASCADE
 );
 
 create table if not exists sessions_usuaris(
