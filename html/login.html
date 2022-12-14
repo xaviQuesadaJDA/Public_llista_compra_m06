@@ -18,6 +18,14 @@
             visibility: visible;
             background-color: yellow;
             color: red;
+            animation-name: "show-toast";
+            animation-duration: 4s;
+        }
+        @keyframes show-toast {
+            0%   {width: 40%; }
+            50%  {width: 100%; }
+            75%  {width: 100%; }
+            100% {width: 40%}
         }
     </style>
     <script>
@@ -50,7 +58,7 @@
                 window.location = "/restricted/llista.html";
             }else{
                 txt_error.className = "show";
-                setTimeout(function(){ txt_error.className = "toast"; }, 3000);
+                setTimeout(function(){ txt_error.className = "toast"; }, 4000);
             }
         }
     </script>

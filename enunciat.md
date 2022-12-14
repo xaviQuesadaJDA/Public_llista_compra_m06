@@ -50,6 +50,7 @@ classDiagram
         + Usuari create_usuari(user, password)
         + Dictionary registre_usuari(nom, password)
         + Dictionary login_usuari(nom, password)
+        + Usuari get_usuari_from_api_key(api_key):
     }
 
     class Configurador{
@@ -71,6 +72,7 @@ classDiagram
         - Usuari desa()
         - delete()
         - str set_sessio()
+        - Llista get_llista()
     }
 
     class Llista{

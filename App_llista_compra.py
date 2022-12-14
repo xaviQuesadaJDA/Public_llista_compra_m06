@@ -55,6 +55,10 @@ class App_llista_compra:
                 return {"estatus": 200, "missatge": "OK", "api_key": self.__crea_sessio(usuari)}
         return {"estatus": 404, "missatge": "L'usuari no existeix o la paraula de pas no és correcta."}
 
+    def get_usuari_from_api_key(self, api_key):
+        usuari = self.configurador.get_Persistencia_factory().get_Persistencia_usuari_factory().get_from_apikey(api_key)
+        return usuari
+
     def __crea_sessio(self, usuari):
         session_uuid = str(uuid.uuid4())
         usuari.set_sessio(session_uuid)
