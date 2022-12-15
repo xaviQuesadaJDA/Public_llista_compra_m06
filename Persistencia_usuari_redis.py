@@ -10,11 +10,13 @@ class Persistencia_usuari_redis(Persistencia_usuari.Persistencia_usuari):
         self.configurador = configurador
 
     def get(self, id):
+        id = id if type(id) is str else id.decode()
         db = self.__get_db_connection()
-        key = 'usuari:' + id.decode()
+        key = 'usuari:' + id
 
         
-        usuari_nom = db.hget(key, 'nom').decode()
+        usuari_nom = db.hget(key, 'nom')
+        usuari_nom = usuari_nom.decode() if usuari_nom else None
         if usuari_nom:
             usuari_password_hash = db.hget(key, 'password_hash').decode()
             resultat = Usuari.Usuari(
@@ -27,21 +29,13 @@ class Persistencia_usuari_redis(Persistencia_usuari.Persistencia_usuari):
         return None
 
     def get_from_apikey(self, id_sessio):
-        raise NotImplementedError("# TODO get_from_apikey")
-        # db = self.__get_db_connection()
-        # query = "select id, usuaris.usuari, password_hash from usuaris inner join sessions_usuaris on (sessions_usuaris.usuari = usuaris.id) where sessions_usuaris.uuid = %s;"
-        # valors = (id_sessio,)
-        # cursor = db.cursor()
-        # cursor.execute(query, valors)
+        db = self.__get_db_connection()
+        id_usuari = db.get('sessio:' + id_sessio)
 
-        # registres = cursor.fetchall()
-        # if len(registres) > 0:
-        #     usuari_id = registres[0][0]
-        #     usuari_nom = registres[0][1]
-        #     usuari_password = registres[0][2]
-        #     resultat = Usuari.Usuari(self.configurador.get_Persistencia_factory().get_Persistencia_usuari_factory(), usuari_id, usuari_nom, usuari_password)
-        #     return resultat
-        # return None
+        if id_usuari:
+            resultat = self.get(id_usuari)
+            return resultat
+        return None
 
     def desa(self, usuari):
         db = self.__get_db_connection()
@@ -66,6 +60,7 @@ class Persistencia_usuari_redis(Persistencia_usuari.Persistencia_usuari):
 
     def delete(self, id):
         db = self.__get_db_connection()
+        db.srem('usuaris', id)
         db.delete('usuari:' + id)
         resultat = True
         db.quit()
@@ -80,6 +75,6 @@ class Persistencia_usuari_redis(Persistencia_usuari.Persistencia_usuari):
     def set_sessio(self, id_sessio, usuari):
         db = self.__get_db_connection()
 
-        db.rpush('sessions' + id_sessio, usuari.get_id())
+        db.set('sessio:' + id_sessio, usuari.get_id())
         db.quit()
         return id_sessio
